@@ -16,12 +16,11 @@ export const Filter = () => {
             <Label htmlFor='search'>
                 Find contacts by name
                 <Input
-                type="text"
-                name="search"
-                value={filter}
-                onChange={() => handleChangeFilter}/>
+                    type="text"
+                    name="search"
+                    value={filter}
+                    onChange={handleChangeFilter}/>
             </Label>
-            
         </>
-    )
+    );
 };

@@ -1,11 +1,13 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
-const initialContacts = [
-    {"id": "id-1", "name": "Rosie Simpson", "number": "459-12-56"},
-    {"id": "id-2", "name": "Hermione Kline", "number": "443-89-12"},
-    {"id": "id-3", "name": "Eden Clements", "number": "645-17-79"},
-    {"id": "id-4", "name": "Annie Copeland", "number": "227-91-26"}
-];
+const initialContacts = {
+    contactList: [
+        {"id": "id-1", "name": "Rosie Simpson", "number": "459-12-56"},
+        {"id": "id-2", "name": "Hermione Kline", "number": "443-89-12"},
+        {"id": "id-3", "name": "Eden Clements", "number": "645-17-79"},
+        {"id": "id-4", "name": "Annie Copeland", "number": "227-91-26"}
+    ],
+};
 
 const contactsSlice = createSlice({
     name: "contacts",
@@ -13,19 +15,26 @@ const contactsSlice = createSlice({
     reducers: {
         addContact: {
             reducer(state, action) {
-                state.push(action.payload);
+                const newName = state.contactList.some(contact =>
+                contact.name.toLowerCase() === action.payload.name.toLowerCase());
+                if (newName) {
+                return alert(`${action.payload.name} is already in contacts`);
+                }
+                state.contactList.push(action.payload);
             },
-            prepare(value) {
+            prepare(name, number) {
                     return{
                         payload: {
-                            value,
                             id: nanoid(),
+                            name,
+                            number,
                         },
                     };
             },
         },
         deleteContact(state, action) { 
-            return state.filter(contact => contact.id !== action.payload)
+            const index = state.contactList.findIndex(contact => contact.id === action.payload);
+            state.contactList.splice(index, 1);
         },
     },
 });
