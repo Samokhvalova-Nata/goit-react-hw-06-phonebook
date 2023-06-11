@@ -10,7 +10,10 @@ export const ContactItem = ({ id, name, number }) => {
         <Item>
             <Text>{name}</Text>
             <Text>{number}</Text>
-            <Button type='button' onClick={handleDelete}>Delete</Button>
+            <Button type='button'
+                onClick={handleDelete}>
+                Delete
+            </Button>
         </Item>
     );
 };

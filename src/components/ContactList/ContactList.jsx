@@ -12,6 +12,7 @@ export const ContactList = () => {
             {visibleContacts.map(({ id, name, number }) => (
                 <ContactItem
                     key={id}
+                    id={id}
                     name={name}
                     number={number}
                 />
